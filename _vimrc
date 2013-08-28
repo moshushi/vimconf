@@ -1,33 +1,106 @@
-set keymap=russian-jcukenwin
-set iminsert=0
-set imsearch=0
+"НАСТРОЙКИ ВНЕШНЕГО ВИДА И БАЗОВЫЕ НАСТРОЙКИ РЕДАКТОРА
+set nocompatible " be iMproved
+
 set number
-
-"syntax enable
-"set background=dark
-"colorscheme solarized
-
 syntax enable
+hi StatusLine ctermbg=3 ctermfg=4
 set background=light
-"colorscheme solarized
+"colorscheme blue
+set laststatus=2
+hi StatusLine guibg=black
+"hi StatusLine gui=reverse cterm=reverse
+set clipboard=unnamed
+set visualbell
 
-if has('gui_running')
+"if has('gui_running')
 "   set guifont=Consolas:h20:b:cDEFAULT
-	set guifont=Droid_Sans_Mono:h18:b:cDEFAULT
+"	set guifont=Droid_Sans_Mono:h18:b:cDEFAULT
+"endif
+
+"if has('win32')
+   "let $VIMRUNTIME = $HOME.'\Programs\Vim\vim72'
+   "source $VIMRUNTIME/mswin.vim
+"else
+   "let $VIMRUNTIME = $HOME.'/.vim'
+"endif
+
+"НАСТРОЙКИ РАБОТЫ С ФАЙЛАМИ
+"Кодировка редактора (терминала) по умолчанию (при создании все файлы приводятся к этой кодировке)
+if has('win32')
+   set encoding=cp1251
+else
+   set encoding=utf-8
+   set termencoding=utf-8
+endif
+" формат файла по умолчанию (влияет на окончания строк) - будет перебираться в указанном порядке
+set fileformat=unix
+" варианты кодировки файла по умолчанию (все файлы по умолчанию сохраняются в этой кодировке)
+set fencs=utf-8,cp1251,koi8-r,cp866
+
+if has('gui')
+    " отключаем графические табы (останутся текстовые,
+    " занимают меньше места на экране)
+    set guioptions-=e
+    " отключить показ иконок в окне GUI (файл, сохранить и т.д.)
+    set guioptions-=T
+
+    if has('win32')
+        set guifont=Lucida_Console:h10:cRUSSIAN::
+"	set guifont=Droid_Sans_Mono:h18:b:cDEFAULT
+    else
+        set guifont=Terminus\ 10
+    endif
 endif
 
-"vundle
-set nocompatible
-filetype off
+"НАСТРОЙКИ ПЕРЕКЛЮЧЕНИЯ РАСКЛАДОК КЛАВИАТУРЫ
+set keymap=russian-jcukenwin " настраиваем переключение раскладок клавиатуры по <C-^>
+set iminsert=0 " раскладка по умолчанию - английская
+set imsearch=0 " аналогично для строки поиска и ввода команд
+function! MyKeyMapHighlight()
+   if &iminsert == 0 " при английской раскладке статусная строка текущего окна будет серого цвета
+      hi StatusLine ctermfg=White guifg=White
+   else " а при русской - зеленого.
+      hi StatusLine ctermfg=DarkRed guifg=DarkRed
+   endif
+endfunction
+call MyKeyMapHighlight() " при старте Vim устанавливать цвет статусной строки
+autocmd WinEnter * :call MyKeyMapHighlight() " при смене окна обновлять информацию о раскладках
 
-set rtp+=~/.vim/bundle/vundle/
+"Vundle on Windows
+"cd %USERPROFILE%
+" git clone https://github.com/gmarik/vundle.git %USERPROFILE%/vimfiles/bundle/vundle
 
+filetype off " required!
+
+if has('win32')
+	set rtp+=%USERPROFILE%/vimfiles/bundle/vundle/
+else
+	set rtp+=~/.vim/bundle/vundle/
+endif
 call vundle#rc()
 
-filetype plugin indent on
+" let Vundle manage Vundle
+ " required! 
+ Bundle 'gmarik/vundle'
 
-" оригинальные репозитории на github
-
+ " My Bundles here:
+ "
+ " original repos on github
 Bundle 'klen/python-mode'
-Bundle 'gmarik/vundle'
 
+ " vim-scripts repos
+" Bundle 'L9'
+
+ " non github repos
+" Bundle 'git://git.wincent.com/command-t.git'
+
+filetype plugin indent on     " required!
+ "
+ " Brief help
+ " :BundleList          - list configured bundles
+ " :BundleInstall(!)    - install(update) bundles
+ " :BundleSearch(!) foo - search(or refresh cache first) for foo
+ " :BundleClean(!)      - confirm(or auto-approve) removal of unused bundles
+ "
+ " see :h vundle for more details or wiki for FAQ
+ " NOTE: comments after Bundle command are not allowed.
