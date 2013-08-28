@@ -1,14 +1,17 @@
 "ÍÀÑÒĞÎÉÊÈ ÂÍÅØÍÅÃÎ ÂÈÄÀ È ÁÀÇÎÂÛÅ ÍÀÑÒĞÎÉÊÈ ĞÅÄÀÊÒÎĞÀ
 set nocompatible " be iMproved
-
 set number
 syntax enable
-hi StatusLine ctermbg=3 ctermfg=4
-set background=light
-"colorscheme blue
+"set background=light
+"colorscheme slate
+colorscheme zellner
 set laststatus=2
-hi StatusLine guibg=black
+
+"hi StatusLine guibg=red
+"hi StatusLine ctermbg=3 ctermfg=4
+"hi StatusLine guibg=black
 "hi StatusLine gui=reverse cterm=reverse
+
 set clipboard=unnamed
 set visualbell
 
@@ -45,8 +48,8 @@ if has('gui')
     set guioptions-=T
 
     if has('win32')
-        set guifont=Lucida_Console:h10:cRUSSIAN::
-"	set guifont=Droid_Sans_Mono:h18:b:cDEFAULT
+"        set guifont=Lucida_Console:h10:cRUSSIAN::
+	set guifont=Droid_Sans_Mono:h18:b:cDEFAULT
     else
         set guifont=Terminus\ 10
     endif
@@ -74,6 +77,7 @@ filetype off " required!
 
 if has('win32')
 	set rtp+=%USERPROFILE%/vimfiles/bundle/vundle/
+"	set rtp+=$HOME/vimfiles/bundle/vundle/
 else
 	set rtp+=~/.vim/bundle/vundle/
 endif
