@@ -75,13 +75,16 @@ autocmd WinEnter * :call MyKeyMapHighlight() " при смене окна обновлять информац
 
 filetype off " required!
 
-if has('win32')
-	set rtp+=%USERPROFILE%/vimfiles/bundle/vundle/
-"	set rtp+=$HOME/vimfiles/bundle/vundle/
+if has('win32') || has('win64')
+	"set rtp+=%USERPROFILE%/vimfiles/bundle/vundle/
+	set rtp+=$HOME/vimfiles/bundle/vundle/
+	"set trp+=~/vimfiles/bundle/vundle/
+	call vundle#rc('$HOME/vimfiles/bundle/')
 else
+	"Usual quickstart instructions
 	set rtp+=~/.vim/bundle/vundle/
+	call vundle#rc()
 endif
-call vundle#rc()
 
 " let Vundle manage Vundle
  " required! 
