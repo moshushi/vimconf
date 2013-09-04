@@ -78,7 +78,7 @@ filetype off " required!
 if has('win32') || has('win64')
 	"set rtp+=%USERPROFILE%/vimfiles/bundle/vundle/
 	set rtp+=$HOME/vimfiles/bundle/vundle/
-	"set trp+=~/vimfiles/bundle/vundle/
+"	set trp+=~/vimfiles/bundle/vundle/
 	call vundle#rc('$HOME/vimfiles/bundle/')
 else
 	"Usual quickstart instructions
@@ -88,14 +88,15 @@ endif
 
 " let Vundle manage Vundle
  " required! 
- Bundle 'gmarik/vundle'
+Bundle 'gmarik/vundle'
 
- " My Bundles here:
- "
- " original repos on github
+" My Bundles here:
+"
+" original repos on github
+"Bundle 'klen/python-mode'
 Bundle 'klen/python-mode'
 
- " vim-scripts repos
+" vim-scripts repos
 " Bundle 'L9'
 
  " non github repos
