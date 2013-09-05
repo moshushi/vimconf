@@ -122,3 +122,13 @@ colorscheme solarized
 else
 	set background=dark
 endif
+
+"let g:pymode_run_key='RR'
+"let g:pymode_run_key='<leader>r'
+
+"Ќастройка python-mode
+let g:pymode_options = 0
+let g:pymode_lint_write = 0 "не провер€ть при каждом сохранении
+let g:pymode_folding = 0 "мне не нужен авто-фолдинг
+let g:pymode_rope_vim_completion = 0 "не использовать автодополнение rope
+map <F3> :PyLint <CR>
