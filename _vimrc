@@ -4,7 +4,9 @@ set number
 syntax enable
 "set background=light
 "colorscheme slate
-colorscheme zellner
+
+"colorscheme zellner
+"colorscheme solarized
 set laststatus=2
 
 "hi StatusLine guibg=red
@@ -47,7 +49,7 @@ if has('gui')
     " отключить показ иконок в окне GUI (файл, сохранить и т.д.)
     set guioptions-=T
 
-    if has('win32')
+    if has('win32') || has('win64')
 "        set guifont=Lucida_Console:h10:cRUSSIAN::
 	set guifont=Droid_Sans_Mono:h18:b:cDEFAULT
     else
@@ -95,6 +97,7 @@ Bundle 'gmarik/vundle'
 " original repos on github
 "Bundle 'klen/python-mode'
 Bundle 'klen/python-mode'
+Bundle 'altercation/vim-colors-solarized'
 
 " vim-scripts repos
 " Bundle 'L9'
@@ -112,3 +115,10 @@ filetype plugin indent on     " required!
  "
  " see :h vundle for more details or wiki for FAQ
  " NOTE: comments after Bundle command are not allowed.
+
+colorscheme solarized 
+ if has('gui_running')
+	set background=light
+else
+	set background=dark
+endif
