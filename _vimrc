@@ -1,14 +1,16 @@
-"НАСТРОЙКИ ВНЕШНЕГО ВИДА И БАЗОВЫЕ НАСТРОЙКИ РЕДАКТОРА
+"========================================================================
+" My .		vimrc
+" URL:		https://github.com/moshushi/vimconf.git
+"========================================================================
+
+
+" Interface
 set nocompatible " be iMproved
 set number
 syntax enable
-"set background=light
-"colorscheme slate
 
-"colorscheme zellner
-"colorscheme solarized
+" Status line
 set laststatus=2
-
 "hi StatusLine guibg=red
 "hi StatusLine ctermbg=3 ctermfg=4
 "hi StatusLine guibg=black
@@ -16,18 +18,6 @@ set laststatus=2
 
 set clipboard=unnamed
 set visualbell
-
-"if has('gui_running')
-"   set guifont=Consolas:h20:b:cDEFAULT
-"	set guifont=Droid_Sans_Mono:h18:b:cDEFAULT
-"endif
-
-"if has('win32')
-   "let $VIMRUNTIME = $HOME.'\Programs\Vim\vim72'
-   "source $VIMRUNTIME/mswin.vim
-"else
-   "let $VIMRUNTIME = $HOME.'/.vim'
-"endif
 
 "НАСТРОЙКИ РАБОТЫ С ФАЙЛАМИ
 "Кодировка редактора (терминала) по умолчанию (при создании все файлы приводятся к этой кодировке)
@@ -49,7 +39,7 @@ if has('gui')
     " отключить показ иконок в окне GUI (файл, сохранить и т.д.)
     set guioptions-=T
 
-    if has('win32') || has('win64')
+
 "        set guifont=Lucida_Console:h10:cRUSSIAN::
 	set guifont=Droid_Sans_Mono:h18:b:cDEFAULT
     else
@@ -58,51 +48,49 @@ if has('gui')
 endif
 
 "НАСТРОЙКИ ПЕРЕКЛЮЧЕНИЯ РАСКЛАДОК КЛАВИАТУРЫ
+"Требует доработки
 set keymap=russian-jcukenwin " настраиваем переключение раскладок клавиатуры по <C-^>
 set iminsert=0 " раскладка по умолчанию - английская
 set imsearch=0 " аналогично для строки поиска и ввода команд
-function! MyKeyMapHighlight()
-   if &iminsert == 0 " при английской раскладке статусная строка текущего окна будет серого цвета
-      hi StatusLine ctermfg=White guifg=White
-   else " а при русской - зеленого.
-      hi StatusLine ctermfg=DarkRed guifg=DarkRed
-   endif
-endfunction
-call MyKeyMapHighlight() " при старте Vim устанавливать цвет статусной строки
-autocmd WinEnter * :call MyKeyMapHighlight() " при смене окна обновлять информацию о раскладках
 
+
+" Vundle setup
 "Vundle on Windows
 "cd %USERPROFILE%
 " git clone https://github.com/gmarik/vundle.git %USERPROFILE%/vimfiles/bundle/vundle
 
 filetype off " required!
 
+" Usual quickstart instructions
 if has('win32') || has('win64')
-	"set rtp+=%USERPROFILE%/vimfiles/bundle/vundle/
 	set rtp+=$HOME/vimfiles/bundle/vundle/
-"	set trp+=~/vimfiles/bundle/vundle/
 	call vundle#rc('$HOME/vimfiles/bundle/')
 else
-	"Usual quickstart instructions
 	set rtp+=~/.vim/bundle/vundle/
 	call vundle#rc()
 endif
 
 " let Vundle manage Vundle
- " required! 
+" required! 
 Bundle 'gmarik/vundle'
+"========================================================================
+" My Bundles list here:
+"========================================================================
 
-" My Bundles here:
-"
 " original repos on github
-"Bundle 'klen/python-mode'
+" Python/Django
 Bundle 'klen/python-mode'
+
+" Colorschemes
 Bundle 'altercation/vim-colors-solarized'
+"Bundle 'git://github.com/trapd00r/neverland-vim-theme.git'
+"Bundle 'git://github.com/sickill/vim-monokai.git'
+"Bundle 'git://github.com/tomasr/molokai.git'
 
 " vim-scripts repos
 " Bundle 'L9'
 
- " non github repos
+" non github repos
 " Bundle 'git://git.wincent.com/command-t.git'
 
 filetype plugin indent on     " required!
@@ -116,6 +104,9 @@ filetype plugin indent on     " required!
  " see :h vundle for more details or wiki for FAQ
  " NOTE: comments after Bundle command are not allowed.
 
+"========================================================================
+"Plugin configuration
+"========================================================================
 colorscheme solarized 
  if has('gui_running')
 	set background=light
@@ -125,10 +116,34 @@ endif
 
 "let g:pymode_run_key='RR'
 "let g:pymode_run_key='<leader>r'
+"The default leader is '\\', but many people prefer ',' as it's in a standard
+"location
+let mapleader = ','
 
-"Настройка python-mode
+"Customize python-mode
 let g:pymode_options = 0
 let g:pymode_lint_write = 0 "не проверять при каждом сохранении
 let g:pymode_folding = 0 "мне не нужен авто-фолдинг
 let g:pymode_rope_vim_completion = 0 "не использовать автодополнение rope
 map <F3> :PyLint <CR>
+
+"========================================================================
+" Auto commands
+"========================================================================
+
+" AutoReload .vimrc
+" from http://vimcasts.org/episodes/updating-your-vimrc-file-on-the-fly/
+" Source the vimrc file after saving it
+    if has("autocmd")
+        autocmd! bufwritepost .vimrc source $MYVIMRC
+    endif
+    
+function! MyKeyMapHighlight()
+   if &iminsert == 0 " при английской раскладке статусная строка текущего окна будет серого цвета
+      hi StatusLine ctermfg=White guifg=White
+   else " а при русской - зеленого.
+      hi StatusLine ctermfg=DarkRed guifg=DarkRed
+   endif
+endfunction
+call MyKeyMapHighlight() " при старте Vim устанавливать цвет статусной строки
+autocmd WinEnter * :call MyKeyMapHighlight() " при смене окна обновлять информацию о раскладках
