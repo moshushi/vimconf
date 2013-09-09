@@ -38,13 +38,10 @@ if has('gui')
     set guioptions-=e
     " отключить показ иконок в окне GUI (файл, сохранить и т.д.)
     set guioptions-=T
-
-
 "        set guifont=Lucida_Console:h10:cRUSSIAN::
 	set guifont=Droid_Sans_Mono:h18:b:cDEFAULT
     else
         set guifont=Terminus\ 10
-    endif
 endif
 
 "НАСТРОЙКИ ПЕРЕКЛЮЧЕНИЯ РАСКЛАДОК КЛАВИАТУРЫ
