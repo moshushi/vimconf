@@ -133,9 +133,12 @@ set noruler
 " => Vundle setup 
 "========================================================================
 
+filetype off " required!
+
  " Vundle on Windows
  " cd %USERPROFILE%
  " git clone https://github.com/gmarik/vundle.git vimfiles/bundle/vundle
+ " Requirements: Git and Curl, openSSL
 
 if has ('win32')
     set rtp+=$HOME/vimfiles/bundle/vundle/
@@ -158,7 +161,7 @@ Bundle 'gmarik/vundle'
 Bundle 'klen/python-mode'
 
 "Colorschemes
-"Bundle 'altercation/vim-colors-solarized'
+Bundle 'altercation/vim-colors-solarized'
 
 " vim-scripts repos
 " Bundle 'L9'
@@ -209,11 +212,11 @@ map <F3> :PyLint <CR>
 "========================================================================
 
 "function! MyKeyMapHighlight()
-"   if &iminsert == 0 " при английской раскладке статусная строка текущего окна будет серого цвета
+"   if &iminsert == 0 " при английской раскладке статусная строка текуего окна будет серого цвета
 "      hi StatusLine ctermfg=White guifg=White
 "   else " а при русской - зеленого.
 "      hi StatusLine ctermfg=DarkRed guifg=DarkRed
 "   endif
 "endfunction
 "call MyKeyMapHighlight() " при старте Vim устанавливать цвет статусной строки
-"autocmd WinEnter * :call MyKeyMapHighlight() " при смене окна обновлять информацию о раскладках
+"autocmd WinEnter * :call MyKeyMapHighlight() " при смене окна обновлять информациі о раскладках
