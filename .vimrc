@@ -58,7 +58,15 @@ set vb
 " Switch on syntax highlighting
 syntax enable
 
-colorscheme desert
+" Set cursor line backlighting
+set cursorline
+
+" Set colorscheme blue for WindowsPowerShell and desert for anyothers
+if !has ('gui_running') && has ('win32')
+    colorscheme blue
+    else
+    colorscheme desert
+endif
 
 " Set extra options when running in GUI mode
 if has ('gui_running')
@@ -70,6 +78,7 @@ endif
 "set encoding=utf8
 if has ('win32')
     set encoding=cp1251
+    "set encoding=utf8
 else 
     set encoding=utf8
 endif
@@ -162,6 +171,7 @@ Bundle 'klen/python-mode'
 
 "Colorschemes
 Bundle 'altercation/vim-colors-solarized'
+" Bundle 'desert-warm-256'
 
 " vim-scripts repos
 " Bundle 'L9'
