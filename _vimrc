@@ -147,11 +147,20 @@ filetype off " required!
  " Vundle on Windows
  " cd %USERPROFILE%
  " git clone https://github.com/gmarik/vundle.git vimfiles/bundle/vundle
+ " git clone https://github.com/gmarik/vundle.git .vim/bundle/vundle
  " Requirements: Git and Curl, openSSL
 
 if has ('win32')
-    set rtp+=$HOME/vimfiles/bundle/vundle/
-    call vundle#rc('$HOME/vimfiles/bundle/')
+ "   set rtp+=$home/vimfiles/bundle/vundle/
+ "   set rtp+=%USERPROFILE%/vimfiles/bundle/vundle.vim
+ "   set rtp+=%USERPROFILE%/.vim/bundle/vundle.vim
+
+
+    set rtp+=%USERPROFILE%/.vim/bundle/vundle
+ "   call vundle#rc('$HOME/vimfiles/bundle/')
+  "  call vundle#rc('%USERPROFILE%/vimfiles/bundle/')
+  " call vundle#rc()
+    call vundle#begin()
 else
     set rtp+=~/.vim/bundle/vundle/
     call vundle#rc()
