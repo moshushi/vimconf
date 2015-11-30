@@ -51,6 +51,13 @@ set wildmenu
 " set visual bell
 set vb
 
+" Menu character encoding (utf8, cp1251, koi8-r, cp866)
+menu Encoding.utf-8 :e++enc=utf8<CR>
+menu Encoding.windows-1251 :e++enc=cp1251<CR>
+menu Encoding.koi8-r :e++enc=koi8-r<CR>
+menu Encoding.cp866 :e++enc=cp866<CR>
+
+
 "========================================================================
 " => Colors and Fonts
 "========================================================================
@@ -75,16 +82,18 @@ if has ('gui_running')
   set t_Co=256
 endif
 
-"set encoding=utf8
-if has ('win32')
-    set encoding=cp1251
-    "set encoding=utf8
-else 
-    set encoding=utf8
-endif
+set encoding=utf8
+"if has ('win32')
+"    set encoding=cp1251
+"    "set encoding=utf8
+"else 
+"    set encoding=utf8
+"endif
 
 set fileformat=unix
+set fileencodings=utf-8,cp1251
 set fencs=utf-8,cp1521,koi8-r,cp866
+set iskeyword=@,a-z,A-Z,48-57,_,128-175,192-255
 
 if has ('win32')
     set guifont=Droid_Sans_Mono:h18:b:cDEFAULT
@@ -101,6 +110,7 @@ endif
 set keymap=russian-jcukenwin " <C-^>
 set iminsert=0 " default English layout
 set imsearch=0 " for search and input too
+highlight lCursor guifg=NONE guibg=Cyan
 
 " Hide the mouse pointer while typing
 set mousehide
@@ -125,12 +135,34 @@ set si
 "Wrap lines
 set wrap
 
+"Enable folding
+set foldenable
+
+"Сворачивание по отступам
+"sef foldmethod=indent
+
+"Автоматическое переключение рабочей папки
+set autochdir
+
 "========================================================================
 " => Status line
 "========================================================================
 
 " Status line
 set laststatus=2
+
+if has("statusline")
+    set statusline=%f\ %m\ %{&fileencoding?&fileencoding:&encoding}
+    "set statusline=%<%f\ %h%m%r%=%{\"[\".(&fenc==\"\"?&enc:&fenc).((exists(\"+bomb\")\ &&\ &bomb)?\",B\":\"\").\"]\ \"}%k\ %-14.(%l,%c%V%)\ %P
+"    set statusline+=%<%t%w%h%m%r "tail of current file and its flags  
+"    set statusline+= [%{strlen(&fenc)?&fenc:'none'}/ "file encoding /  
+"    set statusline+=%{&ff}/ "file format /  
+"    set statusline+=%Y] "file type  
+"    set statusline+= [%{getcwd()}] "cwd() ;-)  
+"    set statusline+= %{FileSize()}  
+"    set statusline+=%= "align the rest to right  
+"    set statusline+=%-7.(%l of %L [%p%%] - Col: %c%V%) "Current line, percentage of size, column  
+endif
 
 " Disable ruler
 set noruler
@@ -147,20 +179,11 @@ filetype off " required!
  " Vundle on Windows
  " cd %USERPROFILE%
  " git clone https://github.com/gmarik/vundle.git vimfiles/bundle/vundle
- " git clone https://github.com/gmarik/vundle.git .vim/bundle/vundle
  " Requirements: Git and Curl, openSSL
 
 if has ('win32')
- "   set rtp+=$home/vimfiles/bundle/vundle/
- "   set rtp+=%USERPROFILE%/vimfiles/bundle/vundle.vim
- "   set rtp+=%USERPROFILE%/.vim/bundle/vundle.vim
-
-
-    set rtp+=%USERPROFILE%/.vim/bundle/vundle
- "   call vundle#rc('$HOME/vimfiles/bundle/')
-  "  call vundle#rc('%USERPROFILE%/vimfiles/bundle/')
-  " call vundle#rc()
-    call vundle#begin()
+    set rtp+=$HOME/vimfiles/bundle/vundle/
+    call vundle#rc('$HOME/vimfiles/bundle/')
 else
     set rtp+=~/.vim/bundle/vundle/
     call vundle#rc()
@@ -221,9 +244,9 @@ let mapleader = ','
 
 "Customize python-mode
 let g:pymode_options = 0
-let g:pymode_lint_write = 0 "�� ��������� ��� ������ ����������
-let g:pymode_folding = 0 "��� �� ����� ����-�������
-let g:pymode_rope_vim_completion = 0 "�� ������������ �������������� rope
+let g:pymode_lint_write = 0 "не проверять при каждом сохранении
+let g:pymode_folding = 0 "мне не нужен авто-фолдинг
+let g:pymode_rope_vim_completion = 0 "не использовать автодополнение rope
 map <F3> :PyLint <CR>
 
 "========================================================================
@@ -231,11 +254,44 @@ map <F3> :PyLint <CR>
 "========================================================================
 
 "function! MyKeyMapHighlight()
-"   if &iminsert == 0 " ��� ���������� ��������� ��������� ������ ������� ���� ����� ������ �����
+"   if &iminsert == 0 " при английской раскладке статусная строка текуего окна будет серого цвета
 "      hi StatusLine ctermfg=White guifg=White
-"   else " � ��� ������� - ��������.
+"   else " а при русской - зеленого.
 "      hi StatusLine ctermfg=DarkRed guifg=DarkRed
 "   endif
 "endfunction
-"call MyKeyMapHighlight() " ��� ������ Vim ������������� ���� ��������� ������
-"autocmd WinEnter * :call MyKeyMapHighlight() " ��� ����� ���� ��������� ��������� � ����������
+"call MyKeyMapHighlight() " при старте Vim устанавливать цвет статусной строки
+"autocmd WinEnter * :call MyKeyMapHighlight() " при смене окна обновлять информациі о раскладках
+
+
+
+"" При создании нового файла *.py и *.pyw будут сразу добавлены два заголовка с
+"" путем до интерпретатора python и с указанием кодировки utf-8
+"function! BufNewFile_PY()
+""0put = '#!/usr/bin/env python'
+""1put = '#-*- coding: utf-8 -*-'
+"0put = '#-*- coding: utf-8 -*-'
+"$put =
+"$put =
+"normal G
+"endfunction
+"
+"autocmd BufNewFile *.py call BufNewFile_PY()
+"autocmd BufNewFile *.pyw call BufNewFile_PY() 
+
+"" Переключение раскладок и индикация выбранной в данный момент раскладки -->
+"" При английской раскладке статусная строка текущего окна будет синего цвета, а при русской - красного
+"function MyKeyMapHighlight()
+"	if &iminsert == 0
+"		hi StatusLine ctermfg=DarkBlue guifg=DarkBlue
+"    else
+"        hi StatusLine ctermfg=DarkRed guifg=DarkRed
+"    endif
+"endfunction
+"" Вызываем функцию, чтобы она установила цвета при запуске Vim'a
+"call MyKeyMapHighlight()
+"" При изменении активного окна будет выполняться обновление индикации текущей раскладки
+"au WinEnter * :call MyKeyMapHighlight()
+
+map <F5> :w\|!python %<cr>
+imap <F5> <Esc><F5>
