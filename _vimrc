@@ -130,7 +130,12 @@ set softtabstop=4
 set ai
 
 "Smart indent
-set si
+"set si    " set smartindent
+"inoremap # X^H#
+
+"Cindent    enable specific indenting for C code
+set cin " set cindent
+
 
 "Wrap lines
 set wrap
