@@ -136,7 +136,7 @@ set si
 set wrap
 
 "Enable folding
-set foldenable
+set nofoldenable
 
 "Сворачивание по отступам
 "sef foldmethod=indent
@@ -207,6 +207,7 @@ Bundle 'altercation/vim-colors-solarized'
 
 " vim-scripts repos
 " Bundle 'L9'
+Bundle 'vim-scripts/Efficient-python-folding'
 
 " non github repos
 " Bundle 'git://git.wincent.com/command-t.git'
