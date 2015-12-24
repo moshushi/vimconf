@@ -214,6 +214,9 @@ Bundle 'altercation/vim-colors-solarized'
 " Bundle 'L9'
 Bundle 'vim-scripts/Efficient-python-folding'
 
+" vim-ipython
+"Bundle 'ivanov/vim-ipython'
+
 " non github repos
 " Bundle 'git://git.wincent.com/command-t.git'
 
@@ -221,7 +224,7 @@ filetype plugin indent on     " required!
 
  "
  " Brief help
- " :BundleList          - list configured bundles
+ " :BundleList          - l:st configured bundles
  " :BundleInstall(!)    - install(update) bundles
  " :BundleSearch(!) foo - search(or refresh cache first) for foo
  " :BundleClean(!)      - confirm(or auto-approve) removal of unused bundles
@@ -246,15 +249,116 @@ filetype plugin indent on     " required!
 "let g:pymode_run_key='<leader>r'
 "The default leader is '\\', but many people prefer ',' as it's in a standard
 "location
-let mapleader = ','
 
 "Customize python-mode
-"let pymode_options = 0
-let g:pymode_lint_write = 0 "не проверять при каждом сохранении
-let g:pymode_options = 0
+let mapleader = ','
+let g:pymode_run_key = '<leader>r' " key for run python code
+
+"Pylint checking
+let g:pymode_lint = 0 " disable pylint checking every save
+nnoremap <leader>p :PymodeLint<cr>
+"nnoremap '<leader>p' :PymodeLint<cr> "pressing ,p will run plyint on current buffer
+
+map <F3> :PymodeLint <CR>
 "let g:pymode_lint_write = 0 "не проверять при каждом сохранении
-let g:pymode_folding = 0 "мне не нужен авто-фолдинг
-let g:pymode_rope_vim_completion = 0 "не использовать автодополнение rope
+"other unused setting now
+"" Check code every save
+"let g:pymode_lint_write = 1
+
+" Auto open cwindow if errors be finded
+"let g:pymode_lint_cwindow = 1
+
+" Auto jump on first error
+"let g:pymode_lint_jump = 0
+
+" Place error signs
+"let g:pymode_lint_signs = 1
+
+" Minimal height of pylint error window
+"let g:pymode_lint_minheight = 3
+
+" Maximal height of pylint error window
+"let g:pymode_lint_maxheight = 6
+
+"Rope refractioring library
+" Load rope plugin
+"let g:pymode_rope = 1
+
+" Auto create and open ropeproject
+"let g:pymode_rope_auto_project = 1
+
+" Enable autoimport
+"let g:pymode_rope_enable_autoimport = 1
+
+" Auto generate global cache
+"let g:pymode_rope_autoimport_generate = 1
+
+"let g:pymode_rope_autoimport_underlineds = 0
+
+"let g:pymode_rope_codeassist_maxfixes = 10
+
+"let g:pymode_rope_sorted_completions = 1
+
+"let g:pymode_rope_extended_complete = 1
+
+"let g:pymode_rope_autoimport_modules = ["os","shutil","datetime"])
+
+"let g:pymode_rope_confirm_saving = 1
+
+"let g:pymode_rope_global_prefix = "<C-x>p"
+
+"let g:pymode_rope_local_prefix = "<C-c>r"
+
+"let g:pymode_rope_vim_completion = 1
+
+"let g:pymode_rope_guess_project = 1
+
+"let g:pymode_rope_goto_def_newwin = 0
+
+"let g:pymode_rope_always_show_complete_menu = 0
+
+"Other stuff default values
+" Load breakpoints plugin
+"let g:pymode_breakpoint = 1
+
+" Key for set/unset breakpoint
+"let g:pymode_breakpoint_key = '<leader>b'
+
+" Autoremove unused whitespaces
+"let g:pymode_utils_whitespaces = 1
+
+" Auto fix vim python paths if virtualenv enabled
+"let g:pymode_virtualenv = 1
+
+" Set default pymode python indent options
+"let g:pymode_options_indent = 1
+
+" Set default pymode python fold options
+"let g:pymode_options_fold = 1
+
+" Set default pymode python other options
+"let g:pymode_options_other = 1
+
+"K       	Show python docs
+"<C-Space>	Rope autocomplete
+"<Leader>r	Run python
+"<Leader>b	Set, unset breakpoint
+
+"Command	Description
+":Pydoc <args>	Show python documentation
+"PyLintToggle	Enable, disable pylint
+"PyLint	Check current buffer
+"Pyrun	Run current buffer in python
+
+"nnoremap <leader>p :PyLint<cr> "pressing ,p will run pylint on current buffer
+
+"let g:pymode_options = 0
+"let g:pymode_lint_write = 0 "не проверять при каждом сохранении
+"let g:pymode_folding = 0 "мне не нужен авто-фолдинг
+"let g:pymode_rope_vim_completion = 0 "не использовать автодополнение rope
+
+"let g:pymode_lint_write = 0 "не проверять при каждом сохранении
+
 map <F3> :PymodeLint <CR>
 
 "========================================================================
