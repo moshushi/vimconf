@@ -141,7 +141,9 @@ set cin " set cindent
 set wrap
 
 "Enable folding
-set nofoldenable
+set nofoldenable "set nofen or set fen
+"au WinEnter * set nofen
+"au WinLeave * set nofen
 
 "Сворачивание по отступам
 "sef foldmethod=indent
@@ -407,3 +409,10 @@ map <F3> :PymodeLint <CR>
 
 map <F5> :w\|!python %<cr>
 imap <F5> <Esc><F5>
+
+" comment code
+vnoremap <silent> # :s#^#\# #<cr>:noh<cr>
+vnoremap <silent> -# :s#^\# ##<cr>:noh<cr>
+
+
+"let g:pymode_folding = 0 "мне не нужен авто-фолдинг
