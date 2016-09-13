@@ -83,12 +83,6 @@ if has ('gui_running')
 endif
 
 set encoding=utf8
-"if has ('win32')
-"    set encoding=cp1251
-"    "set encoding=utf8
-"else 
-"    set encoding=utf8
-"endif
 
 set fileformat=unix
 set fileencodings=utf-8,cp1251
@@ -141,7 +135,10 @@ set cin " set cindent
 set wrap
 
 "Enable folding
-set nofoldenable "set nofen or set fen
+"set nofoldenable "set nofen or set fen
+""set nofen
+set foldmethod=indent
+set foldlevel=99
 "au WinEnter * set nofen
 "au WinLeave * set nofen
 
@@ -160,15 +157,6 @@ set laststatus=2
 
 if has("statusline")
     set statusline=%f\ %m\ %{&fileencoding?&fileencoding:&encoding}
-    "set statusline=%<%f\ %h%m%r%=%{\"[\".(&fenc==\"\"?&enc:&fenc).((exists(\"+bomb\")\ &&\ &bomb)?\",B\":\"\").\"]\ \"}%k\ %-14.(%l,%c%V%)\ %P
-"    set statusline+=%<%t%w%h%m%r "tail of current file and its flags  
-"    set statusline+= [%{strlen(&fenc)?&fenc:'none'}/ "file encoding /  
-"    set statusline+=%{&ff}/ "file format /  
-"    set statusline+=%Y] "file type  
-"    set statusline+= [%{getcwd()}] "cwd() ;-)  
-"    set statusline+= %{FileSize()}  
-"    set statusline+=%= "align the rest to right  
-"    set statusline+=%-7.(%l of %L [%p%%] - Col: %c%V%) "Current line, percentage of size, column  
 endif
 
 " Disable ruler
@@ -247,172 +235,46 @@ filetype plugin indent on     " required!
 "endif
 
 
-"let g:pymode_run_key='RR'
-"let g:pymode_run_key='<leader>r'
-"The default leader is '\\', but many people prefer ',' as it's in a standard
-"location
-
 "Customize python-mode
 let mapleader = ','
 let g:pymode_run_key = '<leader>r' " key for run python code
 
 "Pylint checking
 let g:pymode_lint = 0 " disable pylint checking every save
-nnoremap <leader>p :PymodeLint<cr>
-"nnoremap '<leader>p' :PymodeLint<cr> "pressing ,p will run plyint on current buffer
+nnoremap <leader>p :PymodeLint<cr> "pressing ,p will run plyint on current buffer
 
 map <F3> :PymodeLint <CR>
-"let g:pymode_lint_write = 0 "не проверять при каждом сохранении
-"other unused setting now
-"" Check code every save
-"let g:pymode_lint_write = 1
+map <F5> :w\|!python %<cr>
+imap <F5> <Esc><F5>
 
-" Auto open cwindow if errors be finded
-"let g:pymode_lint_cwindow = 1
-
-" Auto jump on first error
-"let g:pymode_lint_jump = 0
-
-" Place error signs
-"let g:pymode_lint_signs = 1
-
-" Minimal height of pylint error window
-"let g:pymode_lint_minheight = 3
-
-" Maximal height of pylint error window
-"let g:pymode_lint_maxheight = 6
-
-"Rope refractioring library
-" Load rope plugin
-"let g:pymode_rope = 1
-
-" Auto create and open ropeproject
-"let g:pymode_rope_auto_project = 1
-
-" Enable autoimport
-"let g:pymode_rope_enable_autoimport = 1
-
-" Auto generate global cache
-"let g:pymode_rope_autoimport_generate = 1
-
-"let g:pymode_rope_autoimport_underlineds = 0
-
-"let g:pymode_rope_codeassist_maxfixes = 10
-
-"let g:pymode_rope_sorted_completions = 1
-
-"let g:pymode_rope_extended_complete = 1
-
-"let g:pymode_rope_autoimport_modules = ["os","shutil","datetime"])
-
-"let g:pymode_rope_confirm_saving = 1
-
-"let g:pymode_rope_global_prefix = "<C-x>p"
-
-"let g:pymode_rope_local_prefix = "<C-c>r"
-
-"let g:pymode_rope_vim_completion = 1
-
-"let g:pymode_rope_guess_project = 1
-
-"let g:pymode_rope_goto_def_newwin = 0
-
-"let g:pymode_rope_always_show_complete_menu = 0
-
-"Other stuff default values
-" Load breakpoints plugin
-"let g:pymode_breakpoint = 1
-
-" Key for set/unset breakpoint
-"let g:pymode_breakpoint_key = '<leader>b'
-
-" Autoremove unused whitespaces
-"let g:pymode_utils_whitespaces = 1
-
-" Auto fix vim python paths if virtualenv enabled
-"let g:pymode_virtualenv = 1
-
-" Set default pymode python indent options
-"let g:pymode_options_indent = 1
-
-" Set default pymode python fold options
-"let g:pymode_options_fold = 1
-
-" Set default pymode python other options
-"let g:pymode_options_other = 1
-
-"K       	Show python docs
-"<C-Space>	Rope autocomplete
-"<Leader>r	Run python
-"<Leader>b	Set, unset breakpoint
-
-"Command	Description
-":Pydoc <args>	Show python documentation
-"PyLintToggle	Enable, disable pylint
-"PyLint	Check current buffer
-"Pyrun	Run current buffer in python
-
-"nnoremap <leader>p :PyLint<cr> "pressing ,p will run pylint on current buffer
-
-"let g:pymode_options = 0
-"let g:pymode_lint_write = 0 "не проверять при каждом сохранении
-"let g:pymode_folding = 0 "мне не нужен авто-фолдинг
-"let g:pymode_rope_vim_completion = 0 "не использовать автодополнение rope
-
-"let g:pymode_lint_write = 0 "не проверять при каждом сохранении
-
-map <F3> :PymodeLint <CR>
 
 "========================================================================
 " => Auto commands
 "========================================================================
 
-"function! MyKeyMapHighlight()
-"   if &iminsert == 0 " при английской раскладке статусная строка текуего окна будет серого цвета
-"      hi StatusLine ctermfg=White guifg=White
-"   else " а при русской - зеленого.
-"      hi StatusLine ctermfg=DarkRed guifg=DarkRed
-"   endif
-"endfunction
-"call MyKeyMapHighlight() " при старте Vim устанавливать цвет статусной строки
-"autocmd WinEnter * :call MyKeyMapHighlight() " при смене окна обновлять информациі о раскладках
-
-
-
-"" При создании нового файла *.py и *.pyw будут сразу добавлены два заголовка с
-"" путем до интерпретатора python и с указанием кодировки utf-8
-"function! BufNewFile_PY()
-""0put = '#!/usr/bin/env python'
-""1put = '#-*- coding: utf-8 -*-'
-"0put = '#-*- coding: utf-8 -*-'
-"$put =
-"$put =
-"normal G
-"endfunction
-"
-"autocmd BufNewFile *.py call BufNewFile_PY()
-"autocmd BufNewFile *.pyw call BufNewFile_PY() 
-
-"" Переключение раскладок и индикация выбранной в данный момент раскладки -->
-"" При английской раскладке статусная строка текущего окна будет синего цвета, а при русской - красного
-"function MyKeyMapHighlight()
-"	if &iminsert == 0
-"		hi StatusLine ctermfg=DarkBlue guifg=DarkBlue
-"    else
-"        hi StatusLine ctermfg=DarkRed guifg=DarkRed
-"    endif
-"endfunction
-"" Вызываем функцию, чтобы она установила цвета при запуске Vim'a
-"call MyKeyMapHighlight()
-"" При изменении активного окна будет выполняться обновление индикации текущей раскладки
-"au WinEnter * :call MyKeyMapHighlight()
-
-map <F5> :w\|!python %<cr>
-imap <F5> <Esc><F5>
-
 " comment code
 vnoremap <silent> # :s#^#\# #<cr>:noh<cr>
 vnoremap <silent> -# :s#^\# ##<cr>:noh<cr>
 
+" Some try folding
+"g:vim_markdown_folding_disabled=1
+"let g:pymode_folding = 0
 
-"let g:pymode_folding = 0 "мне не нужен авто-фолдинг
+"========================================================================
+
+if ($OS =~ "Windows")
+	"set nocp                    " 'compatible' is not set
+	filetype plugin on          " plugins are enabled
+    colorscheme solarized
+    set background=light
+    set guifont=Consolas:h18::cDEFAULT
+    "set guifont=Droid_Sans_Mono:h18:b:cDEFAULT
+    "NetrwSettings
+    let g:netrw_cygwin= 0
+    let g:netrw_silent = 1
+    let g:netrw_ssh_cmd = 'plink.exe -C -load ub -batch -T -ssh'
+    let g:netrw_scp_cmd = 'pscp.exe -C -load ub -batch -q -scp'
+    let g:netrw_list_cmd = 'plink.exe -C -load ub ls -Fa'
+    let g:netrw_banner = 0
+    ab ub e scp://lis@ubu:22022//home/lis
+endif
