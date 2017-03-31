@@ -12,6 +12,7 @@
 " -> My Bundles list
 " -> Plugin configuration
 " -> Auto commands
+" -> Mapping keys
 "========================================================================
 
 "========================================================================
@@ -278,3 +279,10 @@ if ($OS =~ "Windows")
     let g:netrw_banner = 0
     ab ub e scp://lis@ubu:22022//home/lis
 endif
+
+"========================================================================
+" => Mapping keys
+"========================================================================
+
+" quickly edit vimrc
+nnoremap <leader>ev :split $MYVIMRC<cr>
