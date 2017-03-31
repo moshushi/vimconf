@@ -286,3 +286,5 @@ endif
 
 " quickly edit vimrc
 nnoremap <leader>ev :split $MYVIMRC<cr>
+" source mapping vimrc
+nnoremap <leader>sv :source $MYVIMRC<cr>
