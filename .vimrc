@@ -12,6 +12,7 @@
 " -> My Bundles list
 " -> Plugin configuration
 " -> Auto commands
+" -> Mapping keys
 "========================================================================
 
 "========================================================================
@@ -51,6 +52,13 @@ set wildmenu
 " set visual bell
 set vb
 
+" Menu character encoding (utf8, cp1251, koi8-r, cp866)
+menu Encoding.utf-8 :e++enc=utf8<CR>
+menu Encoding.windows-1251 :e++enc=cp1251<CR>
+menu Encoding.koi8-r :e++enc=koi8-r<CR>
+menu Encoding.cp866 :e++enc=cp866<CR>
+
+
 "========================================================================
 " => Colors and Fonts
 "========================================================================
@@ -75,16 +83,12 @@ if has ('gui_running')
   set t_Co=256
 endif
 
-"set encoding=utf8
-if has ('win32')
-    set encoding=cp1251
-    "set encoding=utf8
-else 
-    set encoding=utf8
-endif
+set encoding=utf8
 
 set fileformat=unix
+set fileencodings=utf-8,cp1251
 set fencs=utf-8,cp1521,koi8-r,cp866
+set iskeyword=@,a-z,A-Z,48-57,_,128-175,192-255
 
 if has ('win32')
     set guifont=Droid_Sans_Mono:h18:b:cDEFAULT
@@ -101,6 +105,7 @@ endif
 set keymap=russian-jcukenwin " <C-^>
 set iminsert=0 " default English layout
 set imsearch=0 " for search and input too
+highlight lCursor guifg=NONE guibg=Cyan
 
 " Hide the mouse pointer while typing
 set mousehide
@@ -120,10 +125,29 @@ set softtabstop=4
 set ai
 
 "Smart indent
-set si
+"set si    " set smartindent
+"inoremap # X^H#
+
+"Cindent    enable specific indenting for C code
+set cin " set cindent
+
 
 "Wrap lines
 set wrap
+
+"Enable folding
+"set nofoldenable "set nofen or set fen
+""set nofen
+set foldmethod=indent
+set foldlevel=99
+"au WinEnter * set nofen
+"au WinLeave * set nofen
+
+"РЎРІРѕСЂР°С‡РёРІР°РЅРёРµ РїРѕ РѕС‚СЃС‚СѓРїР°Рј
+"sef foldmethod=indent
+
+"РђРІС‚РѕРјР°С‚РёС‡РµСЃРєРѕРµ РїРµСЂРµРєР»СЋС‡РµРЅРёРµ СЂР°Р±РѕС‡РµР№ РїР°РїРєРё
+set autochdir
 
 "========================================================================
 " => Status line
@@ -131,6 +155,10 @@ set wrap
 
 " Status line
 set laststatus=2
+
+if has("statusline")
+    set statusline=%f\ %m\ %{&fileencoding?&fileencoding:&encoding}
+endif
 
 " Disable ruler
 set noruler
@@ -175,6 +203,10 @@ Bundle 'altercation/vim-colors-solarized'
 
 " vim-scripts repos
 " Bundle 'L9'
+Bundle 'vim-scripts/Efficient-python-folding'
+
+" vim-ipython
+"Bundle 'ivanov/vim-ipython'
 
 " non github repos
 " Bundle 'git://git.wincent.com/command-t.git'
@@ -183,7 +215,7 @@ filetype plugin indent on     " required!
 
  "
  " Brief help
- " :BundleList          - list configured bundles
+ " :BundleList          - l:st configured bundles
  " :BundleInstall(!)    - install(update) bundles
  " :BundleSearch(!) foo - search(or refresh cache first) for foo
  " :BundleClean(!)      - confirm(or auto-approve) removal of unused bundles
@@ -204,29 +236,59 @@ filetype plugin indent on     " required!
 "endif
 
 
-"let g:pymode_run_key='RR'
-"let g:pymode_run_key='<leader>r'
-"The default leader is '\\', but many people prefer ',' as it's in a standard
-"location
-let mapleader = ','
-
 "Customize python-mode
-let g:pymode_options = 0
-let g:pymode_lint_write = 0 "не проверять при каждом сохранении
-let g:pymode_folding = 0 "мне не нужен авто-фолдинг
-let g:pymode_rope_vim_completion = 0 "не использовать автодополнение rope
-map <F3> :PyLint <CR>
+let mapleader = ','
+let g:pymode_run_key = '<leader>r' " key for run python code
+
+"Enable python3
+let g:pymode_python = 'python3'
+
+"Pylint checking
+let g:pymode_lint = 0 " disable pylint checking every save
+nnoremap <leader>p :PymodeLint<cr> "pressing ,p will run plyint on current buffer
+
+map <F3> :PymodeLint <CR>
+"map <F5> :w\|!python %<cr>
+map <F5> :w\|!python3.6 %<cr>
+imap <F5> <Esc><F5>
+
 
 "========================================================================
 " => Auto commands
 "========================================================================
 
-"function! MyKeyMapHighlight()
-"   if &iminsert == 0 " при английской раскладке статусная строка текуего окна будет серого цвета
-"      hi StatusLine ctermfg=White guifg=White
-"   else " а при русской - зеленого.
-"      hi StatusLine ctermfg=DarkRed guifg=DarkRed
-"   endif
-"endfunction
-"call MyKeyMapHighlight() " при старте Vim устанавливать цвет статусной строки
-"autocmd WinEnter * :call MyKeyMapHighlight() " при смене окна обновлять информациі о раскладках
+" comment code
+vnoremap <silent> # :s#^#\# #<cr>:noh<cr>
+vnoremap <silent> -# :s#^\# ##<cr>:noh<cr>
+
+" Some try folding
+"g:vim_markdown_folding_disabled=1
+"let g:pymode_folding = 0
+
+"========================================================================
+
+if ($OS =~ "Windows")
+	"set nocp                    " 'compatible' is not set
+	filetype plugin on          " plugins are enabled
+    colorscheme solarized
+    set background=light
+    set guifont=Consolas:h18::cDEFAULT
+    "set guifont=Droid_Sans_Mono:h18:b:cDEFAULT
+    "NetrwSettings
+    let g:netrw_cygwin= 0
+    let g:netrw_silent = 1
+    let g:netrw_ssh_cmd = 'plink.exe -C -load ub -batch -T -ssh'
+    let g:netrw_scp_cmd = 'pscp.exe -C -load ub -batch -q -scp'
+    let g:netrw_list_cmd = 'plink.exe -C -load ub ls -Fa'
+    let g:netrw_banner = 0
+    ab ub e scp://lis@ubu:22022//home/lis
+endif
+
+"========================================================================
+" => Mapping keys
+"========================================================================
+
+" quickly edit vimrc
+nnoremap <leader>ev :split $MYVIMRC<cr>
+" source mapping vimrc
+nnoremap <leader>sv :source $MYVIMRC<cr>
