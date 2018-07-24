@@ -10,6 +10,8 @@ endif
 " Specify a directory for plugins
 call plug#begin('~/.local/share/nvim/plugged')
 
+Plug 'pearofducks/ansible-vim', { 'do': 'cd ./UltiSnips; ./generate.py' }
+
 " Plug 'Valloric/YouCompleteMe', {'do': './install.py' }
 
 " color breckets
