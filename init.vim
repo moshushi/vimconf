@@ -1,4 +1,6 @@
-" Neovim config ~/.config/nvim/init.vim
+" Neovim config file ~/.config/nvim/init.vim
+
+set nu
 
 " Automatic installation VIM-PLUG
 if empty(glob('~/.local/share/nvim/site/autoload/plug.vim'))
@@ -26,7 +28,13 @@ Plug 'scrooloose/syntastic'
 " otstupy
 Plug 'nathanaelkane/vim-indent-guides'
 
-
+"colorscheme
+" Plug 'frankier/neovim-colors-solarized-truecolor-only'
+" set termguicolors
+" set background=light " or dark
 
 " Initialize plugin system
 call plug#end()
+
+
+" source ./rainbow.vim
