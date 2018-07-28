@@ -54,6 +54,7 @@ call plug#begin('~/.local/share/nvim/plugged')
 
 " color breckets
 "Plug 'luochen1990/rainbow'
+Plug 'junegunn/rainbow_parentheses.vim'
 
 "auto enter breckets
 "Plug 'Raimondi/delimitMate'
@@ -74,3 +75,7 @@ call plug#end()
 " }}}
 
 " source ./rainbow.vim
+
+"let g:rbpt_loadcmd_toggle=1
+au VimEnter * RainbowParentheses
+au Syntax * RainbowParentheses
