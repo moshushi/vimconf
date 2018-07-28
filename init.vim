@@ -79,3 +79,5 @@ call plug#end()
 "let g:rbpt_loadcmd_toggle=1
 au VimEnter * RainbowParentheses
 au Syntax * RainbowParentheses
+
+set clipboard=unnamedplus
