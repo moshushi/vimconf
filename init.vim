@@ -83,8 +83,8 @@ call plug#end()
 "au VimEnter * RainbowParentheses
 "au Syntax * RainbowParentheses
 
-noremap <silent> <Leader>cc :Tcomment<CR>
 
+" let g:indentLine_char = '┆'         " ^Vu2506
 
 " indentline config
 if exists("g:indentLine_enabled")
