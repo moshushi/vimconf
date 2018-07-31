@@ -30,6 +30,9 @@ set shiftwidth=2    " The anount to block indent when using < and >
 set tabstop=4       " 4 space tab
 set softtabstop=4   " Causes backspace to delete 4 spaces
 set expandtab       " Replase a <TAB?> with spaces in Insert Mode
+
+set clipboard=unnamedplus
+let mapleader = ','
 "}}}
 
 
@@ -44,6 +47,13 @@ endif
 
 " Specify a directory for plugins
 call plug#begin('~/.local/share/nvim/plugged')
+
+" comment
+Plug 'tomtom/tcomment_vim'
+
+" indents
+Plug 'Yggdroot/indentLine'
+
 
 " indents
 " Plug 'nathanaelkane/vim-indent-guides'
@@ -77,7 +87,12 @@ call plug#end()
 " source ./rainbow.vim
 
 "let g:rbpt_loadcmd_toggle=1
-au VimEnter * RainbowParentheses
-au Syntax * RainbowParentheses
+"au VimEnter * RainbowParentheses
+"au Syntax * RainbowParentheses
 
-set clipboard=unnamedplus
+noremap <silent> <Leader>cc :Tcomment<CR>
+
+
+" indentline config
+let g:indentLine_char = '┆'         " ^Vu2506
+let g:indentLine_color_term = 239
