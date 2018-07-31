@@ -49,11 +49,13 @@ endif
 call plug#begin('~/.local/share/nvim/plugged')
 
 " comment
-Plug 'tomtom/tcomment_vim'
+" Plug 'tomtom/tcomment_vim'
 
 " indents
 Plug 'Yggdroot/indentLine'
 
+" comment
+Plug 'tpope/vim-commentary'
 
 " indents
 " Plug 'nathanaelkane/vim-indent-guides'
