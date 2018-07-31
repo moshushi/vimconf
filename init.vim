@@ -94,5 +94,7 @@ noremap <silent> <Leader>cc :Tcomment<CR>
 
 
 " indentline config
-let g:indentLine_char = '┆'         " ^Vu2506
-let g:indentLine_color_term = 239
+if exists("g:indentLine_enabled")
+  let g:indentLine_char = '┆'         " ^Vu2506
+  let g:indentLine_color_term = 239
+endif
