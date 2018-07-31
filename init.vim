@@ -49,33 +49,24 @@ endif
 call plug#begin('~/.local/share/nvim/plugged')
 
 " comment
-" Plug 'tomtom/tcomment_vim'
+Plug 'tpope/vim-commentary'
 
 " indents
 Plug 'Yggdroot/indentLine'
 
-" comment
-Plug 'tpope/vim-commentary'
-
-" indents
-" Plug 'nathanaelkane/vim-indent-guides'
+" color breckets
+Plug 'junegunn/rainbow_parentheses.vim'
 
 " Plug 'pearofducks/ansible-vim', { 'do': 'cd ./UltiSnips; ./generate.py' }
 
 " Plug 'Valloric/YouCompleteMe', {'do': './install.py' }
 
-" color breckets
-"Plug 'luochen1990/rainbow'
-Plug 'junegunn/rainbow_parentheses.vim'
 
 "auto enter breckets
 "Plug 'Raimondi/delimitMate'
 
 " check syntaxis
 "Plug 'scrooloose/syntastic'
-
-" otstupy
-"Plug 'nathanaelkane/vim-indent-guides'
 
 "colorscheme
 " Plug 'frankier/neovim-colors-solarized-truecolor-only'
