@@ -87,7 +87,7 @@ Plug 'trevordmiller/nova-vim'
 Plug 'sickill/vim-monokai'
 Plug 'ewilazarus/preto'
 Plug 'morhetz/gruvbox'
-
+Plug 'arcticicestudio/nord-vim'
 " Initialize plugin system
 call plug#end()
 " }}}
