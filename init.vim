@@ -57,6 +57,15 @@ Plug 'Yggdroot/indentLine'
 " color breckets
 Plug 'junegunn/rainbow_parentheses.vim'
 
+" surround
+Plug 'tpope/vim-surround'
+
+" repeat forsurround
+Plug 'tpope/vim-repeat'
+
+" status line
+Plug 'itchyny/lightline.vim'
+
 " Plug 'pearofducks/ansible-vim', { 'do': 'cd ./UltiSnips; ./generate.py' }
 
 " Plug 'Valloric/YouCompleteMe', {'do': './install.py' }
@@ -69,9 +78,15 @@ Plug 'junegunn/rainbow_parentheses.vim'
 "Plug 'scrooloose/syntastic'
 
 "colorscheme
-" Plug 'frankier/neovim-colors-solarized-truecolor-only'
+Plug 'frankier/neovim-colors-solarized-truecolor-only'
 " set termguicolors
 " set background=light " or dark
+
+Plug 'tomasr/molokai'
+Plug 'trevordmiller/nova-vim'
+Plug 'sickill/vim-monokai'
+Plug 'ewilazarus/preto'
+Plug 'morhetz/gruvbox'
 
 " Initialize plugin system
 call plug#end()
@@ -80,14 +95,43 @@ call plug#end()
 " source ./rainbow.vim
 
 "let g:rbpt_loadcmd_toggle=1
-"au VimEnter * RainbowParentheses
-"au Syntax * RainbowParentheses
+au VimEnter * RainbowParentheses
+au Syntax * RainbowParentheses
 
 
 " let g:indentLine_char = '┆'         " ^Vu2506
 
 " indentline config
-if exists("g:indentLine_enabled")
+" if exists('g:indentLine_enabled')
+" if exists(':IndentLinesToggle')
   let g:indentLine_char = '┆'         " ^Vu2506
   let g:indentLine_color_term = 239
-endif
+  " echo "hi"
+" endif
+
+" if has('gui_running')
+"   colorscheme nova
+" endif
+
+" highlight LineNr guibg="#556873"
+" colorscheme molokai
+
+" colorscheme nova
+" highlight LineNr guibg=#556873
+
+" if colorscheme == 'solarized'
+colorscheme solarized
+set termguicolors
+set background=dark " or dark
+" set background=light " or dark
+" endif
+" {rtp}/autoload/has.vim
+" function! has#colorscheme(name)
+"     pat = 'colors/'.a:name.'.vim'
+"     return !empty(globpath(&rtp, pat))
+" endfunction
+
+" " .vimrc
+" if has#colorscheme('solarized')
+"   set termguicolors
+" endif
