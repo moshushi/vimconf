@@ -7,7 +7,7 @@
 set number                  " Set line numbers on
 set ch=2                    " Make command line two lines high
 set mousehide               " Hide the mouse pointer while typing
-" set cursorline
+set cursorline              " Show cursor line
 
 " Show spez symbols
 set list
