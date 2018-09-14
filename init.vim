@@ -150,3 +150,6 @@ set background=dark " or dark
 
 " let g:python_host_prog = '/full/path/to/neovim2/bin/python'
 " let g:python3_host_prog = '/full/path/to/neovim3/bin/python'
+
+let g:python_host_prog = '/home/lis/.virtualenvs/neovim2/bin/python'
+let g:python3_host_prog = '/home/lis/.virtualenvs/neovim3/bin/python'
