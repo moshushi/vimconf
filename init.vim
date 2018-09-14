@@ -135,3 +135,18 @@ set background=dark " or dark
 " if has#colorscheme('solarized')
 "   set termguicolors
 " endif
+"
+
+" mkvirtualenv neovim2
+" mkvirtualenv neovim3
+
+" workon neovim2
+" pip2 install --user neovim
+" pyenv which python  # Note the path
+
+" workon neovim3
+" pip3 install --user neovim
+" pyenv which python  # Note the path
+
+" let g:python_host_prog = '/full/path/to/neovim2/bin/python'
+" let g:python3_host_prog = '/full/path/to/neovim3/bin/python'
