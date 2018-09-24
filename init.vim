@@ -31,13 +31,36 @@ set tabstop=4       " 4 space tab
 set softtabstop=4   " Causes backspace to delete 4 spaces
 set expandtab       " Replase a <TAB?> with spaces in Insert Mode
 
+" Filetype plugins
+filetype plugin indent on
+autocmd filetype python set expandtab
+
 set clipboard=unnamedplus
-let mapleader = ','
 "}}}
+
+" Change vim behavior {{{
+set hidden
+" set timeoutlen = 400
+" au FocusLost * :wa      " Save on losing focus - check is it work?
+" }}}
+
+" Usefull mapping {{{
+nnoremap ; :
+" inoremap sss <ESC>       " Quicker Escaping
+
+" Quickly edit the vimrc file
+let mapleader = ','
+nmap <silent> <leader>ev :e $MYVIMRC<CR>
+nmap <silent> <leader>ew <C-w><C-v><C-l>:e $MYVIMRC<CR>     " Edit my src in vertical split window
+nmap <silent> <leader>sv :so $MYVIMRC<CR>
+"}}}
+
+cmap w!! w !sudo tee % >/dev/null   " Write file uses sudo
 
 " Enable python providers
 let g:python_host_prog = '/home/lis/.virtualenvs/neovim2/bin/python'
 let g:python3_host_prog = '/home/lis/.virtualenvs/neovim3/bin/python'
+
 
 " Plug sections {{{
 " Automatic installation VIM-PLUG
@@ -46,7 +69,6 @@ if empty(glob('~/.local/share/nvim/site/autoload/plug.vim'))
     \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
   autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
-
 
 " Specify a directory for plugins
 call plug#begin('~/.local/share/nvim/plugged')
@@ -75,6 +97,8 @@ Plug 'neomake/neomake'
   " let g:neomake_python_flake8_maker = { 'args': ['--ignore=E115,E266,E501'], }
   " let g:neomake_python_pep8_maker = { 'args': ['--max-line-length=100', '--ignore=E115,E266'], }
 " }}}
+
+Plug 'plytophogy/vim-virtualenv'
 
 Plug 'chase/vim-ansible-yaml'
 
@@ -217,3 +241,5 @@ endfunction
 nnoremap <silent> <F5> :call SaveAndExecutePython()<CR>
 vnoremap <silent> <F5> :<C-u>call SaveAndExecutePython()<CR>
 " }}}
+
+" echo "(>^.^<)"
